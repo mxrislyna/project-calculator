@@ -34,3 +34,11 @@ function operate(a, operator, b) {
         return "ERROR";
   } 
 }
+
+const display = document.querySelector('#display');
+const numbers = document.querySelector('#left-btns');
+
+numbers.addEventListener('click', (e) => {
+  display.textContent += e.target.textContent;
+});
+
