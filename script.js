@@ -19,14 +19,18 @@ function multiply(a, b) {
 function operate(a, operator, b) {
   switch (operator) {
     case "+":
-      return add(a, b);
+        return add(a, b);
     case "-":
-      return subtract(a, b);
+        return subtract(a, b);
     case "*":
-      return multiply(a, b);
+        return multiply(a, b);
     case "/":
-      return divide(a, b);
+      if (b === 0){ 
+        return "ERROR" 
+      } else {
+        return divide(a, b);
+      }  
     default: 
-      return "ERROR";
+        return "ERROR";
   } 
 }
