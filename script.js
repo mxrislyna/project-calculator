@@ -35,10 +35,24 @@ function operate(a, operator, b) {
   } 
 }
 
+//DOM
 const display = document.querySelector('#display');
 const numbers = document.querySelector('#left-btns');
+const operators = document.querySelector('#right-btns');
+
+let firstNumber;
+let secondNumber;
+let operator;
 
 numbers.addEventListener('click', (e) => {
+  if (e.target.textContent == "=") {
+    display.textContent = operate(firstNumber, operator, secondNumber);
+  } else {
   display.textContent += e.target.textContent;
+  }
+});
+
+operators.addEventListener('click', (e) => {
+  
 });
 
