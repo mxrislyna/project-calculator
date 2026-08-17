@@ -42,17 +42,21 @@ const operators = document.querySelector('#right-btns');
 
 let firstNumber;
 let secondNumber;
-let operator;
 
 numbers.addEventListener('click', (e) => {
   if (e.target.textContent == "=") {
-    display.textContent = operate(firstNumber, operator, secondNumber);
+    secondNumber = display.textContent;
+    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber)); 
+  } else if (display.textContent === "0" || display.textContent == "ERROR") {
+    display.textContent = e.target.textContent;
   } else {
-  display.textContent += e.target.textContent;
+    display.textContent += e.target.textContent;
   }
 });
 
 operators.addEventListener('click', (e) => {
-  
+  firstNumber = display.textContent;
+  operator = e.target.textContent;
+  display.textContent = "";
 });
 
