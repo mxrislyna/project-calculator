@@ -40,6 +40,7 @@ const display = document.querySelector('#display');
 const numbers = document.querySelector('#left-btns');
 const operators = document.querySelector('#right-btns');
 const clearBtn = document.querySelector('.clear');
+const delBtn = document.querySelector('.del');
 
 let firstNumber;
 let secondNumber;
@@ -64,10 +65,21 @@ operators.addEventListener('click', (e) => {
   display.textContent += " " + operator + " ";
 });
 
-clearBtn.addEventListener('click', (e) => {
+//Clear/AC button 
+clearBtn.addEventListener('click', () => {
   display.textContent = ""
   firstNumber = "";
   secondNumber = "";
   operator = "";
 });
 
+//Del button
+delBtn.addEventListener('click', () => {
+  let text = display.textContent;
+  let shortenedText = text.trimEnd().slice(0, -1).trimEnd();
+  display.textContent = shortenedText;
+
+  if (display.textContent === "") {
+    display.textContent = "0";
+  }
+});
