@@ -43,10 +43,12 @@ const operators = document.querySelector('#right-btns');
 let firstNumber;
 let secondNumber;
 
+//Numbers and equals
 numbers.addEventListener('click', (e) => {
   if (e.target.textContent == "=") {
-    secondNumber = display.textContent;
-    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber)); 
+    const parts = display.textContent.split(" ");
+    secondNumber = parts[2];
+    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
   } else if (display.textContent === "0" || display.textContent == "ERROR") {
     display.textContent = e.target.textContent;
   } else {
@@ -54,9 +56,12 @@ numbers.addEventListener('click', (e) => {
   }
 });
 
+//Operators
 operators.addEventListener('click', (e) => {
   firstNumber = display.textContent;
   operator = e.target.textContent;
-  display.textContent = "";
+  display.textContent += " " + operator + " ";
 });
+
+
 
