@@ -39,6 +39,7 @@ function operate(a, operator, b) {
 const display = document.querySelector('#display');
 const numbers = document.querySelector('#left-btns');
 const operators = document.querySelector('#right-btns');
+const clearBtn = document.querySelector('.clear');
 
 let firstNumber;
 let secondNumber;
@@ -63,5 +64,10 @@ operators.addEventListener('click', (e) => {
   display.textContent += " " + operator + " ";
 });
 
-
+clearBtn.addEventListener('click', (e) => {
+  display.textContent = ""
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+});
 
