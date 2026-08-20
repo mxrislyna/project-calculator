@@ -49,18 +49,29 @@ let calculationJustFinished = false;
 
 //Numbers
 numbers.addEventListener('click', (e) => {
-  if (e.target.textContent == "=") { 
+  const input = e.target.textContent;
+
+  if (input == "=") { 
     parts = display.textContent.split(" ");
     secondNumber = parts[2];
     display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
     calculationJustFinished = true;
   } else if (calculationJustFinished == true) {
-    display.textContent = e.target.textContent;
+    display.textContent = input;
     calculationJustFinished = false;
   } else if (display.textContent === "0" || display.textContent == "ERROR") {
-    display.textContent = e.target.textContent;
+    display.textContent = input;
+  } else if (input === ".") {
+    parts = display.textContent.split(" ");
+    if (!parts[parts.length - 1].includes(".")) {
+      if (parts[parts.length - 1] == "") {
+        display.textContent += "0";
+      } else {
+        display.textContent += ".";
+      }
+    }
   } else {
-    display.textContent += e.target.textContent;
+    display.textContent += input;
   }
 });
 
