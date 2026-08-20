@@ -44,6 +44,7 @@ const delBtn = document.querySelector('.del');
 
 let firstNumber;
 let secondNumber;
+let operator;
 
 //Numbers and equals
 numbers.addEventListener('click', (e) => {
@@ -60,9 +61,19 @@ numbers.addEventListener('click', (e) => {
 
 //Operators
 operators.addEventListener('click', (e) => {
-  firstNumber = display.textContent;
-  operator = e.target.textContent;
-  display.textContent += " " + operator + " ";
+  let newOperator = e.target.textContent;
+
+  if (display.textContent.endsWith(" ")) {
+    operator = newOperator;
+
+    let currText = display.textContent;
+    let shortenedCurrText = currText.trimEnd().slice(0,-1);
+    display.textContent =  shortenedCurrText + newOperator + " ";
+  } else {
+    firstNumber = display.textContent;
+    operator = newOperator;
+    display.textContent += " " + operator + " ";
+  }
 });
 
 //Clear/AC button 
@@ -83,3 +94,4 @@ delBtn.addEventListener('click', () => {
     display.textContent = "0";
   }
 });
+
