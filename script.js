@@ -19,16 +19,16 @@ function multiply(a, b) {
 function operate(a, operator, b) {
   switch (operator) {
     case "+":
-        return add(a, b);
+        return parseFloat(add(a, b).toFixed(4));
     case "-":
-        return subtract(a, b);
+        return parseFloat(subtract(a, b).toFixed(4));
     case "*":
-        return multiply(a, b);
+        return parseFloat(multiply(a, b).toFixed(4));
     case "/":
       if (b === 0){ 
         return "ERROR" 
       } else {
-        return divide(a, b);
+        return parseFloat(divide(a, b).toFixed(4));
       }  
     default: 
         return "ERROR";
@@ -116,3 +116,4 @@ delBtn.addEventListener('click', () => {
     display.textContent = "0";
   }
 });
+
