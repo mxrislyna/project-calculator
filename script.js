@@ -45,13 +45,18 @@ const delBtn = document.querySelector('.del');
 let firstNumber;
 let secondNumber;
 let operator;
+let calculationJustFinished = false;
 
-//Numbers and equals
+//Numbers
 numbers.addEventListener('click', (e) => {
-  if (e.target.textContent == "=") {
-    const parts = display.textContent.split(" ");
+  if (e.target.textContent == "=") { 
+    parts = display.textContent.split(" ");
     secondNumber = parts[2];
     display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
+    calculationJustFinished = true;
+  } else if (calculationJustFinished == true) {
+    display.textContent = e.target.textContent;
+    calculationJustFinished = false;
   } else if (display.textContent === "0" || display.textContent == "ERROR") {
     display.textContent = e.target.textContent;
   } else {
@@ -62,10 +67,16 @@ numbers.addEventListener('click', (e) => {
 //Operators
 operators.addEventListener('click', (e) => {
   let newOperator = e.target.textContent;
+  const parts = display.textContent.split(" ");
 
+  if (parts[2]) {
+    secondNumber = parts[2];
+    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
+    calculationJustFinished = true;
+  }
+  
   if (display.textContent.endsWith(" ")) {
     operator = newOperator;
-
     let currText = display.textContent;
     let shortenedCurrText = currText.trimEnd().slice(0,-1);
     display.textContent =  shortenedCurrText + newOperator + " ";
@@ -94,4 +105,3 @@ delBtn.addEventListener('click', () => {
     display.textContent = "0";
   }
 });
-
