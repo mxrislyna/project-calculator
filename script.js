@@ -60,10 +60,7 @@ operators.addEventListener('click', (e) => {
 
 //Clear/AC button 
 clearBtn.addEventListener('click', () => {
-  display.textContent = "0";
-  firstNumber = "";
-  secondNumber = "";
-  operator = "";
+  clearText();
 });
 
 //Del button
@@ -133,6 +130,13 @@ function deleteText() {
   }
 }
 
+function clearText() {
+  display.textContent = "0";
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+}
+
 //Keyboard support
 body.addEventListener('keydown', (e) => {
   if (validNumKeys.includes(e.key)) {
@@ -146,6 +150,9 @@ body.addEventListener('keydown', (e) => {
   }
   if (e.key === "Backspace") {
     deleteText();
+  }
+  if (e.key === "c" || e.key === "C") {
+    clearText();
   }
 });
 
