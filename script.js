@@ -42,30 +42,54 @@ const operators = document.querySelector('#right-btns');
 const clearBtn = document.querySelector('.clear');
 const delBtn = document.querySelector('.del');
 const body = document.querySelector('body');
+const power = document.querySelector('.power');
 
 let firstNumber;
 let secondNumber;
 let operator;
 let calculationJustFinished = false;
+let isCalculatorOn = true;
 
 //Numbers
 numbers.addEventListener('click', (e) => {
-  updateNumbersDisplay(e.target.textContent);
+  if (isCalculatorOn) {
+    updateNumbersDisplay(e.target.textContent);
+  }
 });
 
 //Operators
 operators.addEventListener('click', (e) => {
+  if (isCalculatorOn) {
   updateOperatorDisplay(e.target.textContent);
+  } 
 });
 
 //Clear/AC button 
 clearBtn.addEventListener('click', () => {
-  clearText();
+  if (isCalculatorOn) {
+    clearText();
+  }
 });
 
 //Del button
 delBtn.addEventListener('click', (e) => {
-  deleteText();
+  if (isCalculatorOn) {
+    deleteText();
+  }
+});
+
+//On/Off button
+power.addEventListener('click', () => {
+  isCalculatorOn = !isCalculatorOn;
+
+  if (!isCalculatorOn) {
+    clearText();
+    display.textContent = "";
+    display.style.backgroundColor = "#002500";
+  } else {
+    display.style.backgroundColor = "";
+    display.textContent = "0";
+  }
 });
 
 
@@ -139,20 +163,22 @@ function clearText() {
 
 //Keyboard support
 body.addEventListener('keydown', (e) => {
-  if (validNumKeys.includes(e.key)) {
-    updateNumbersDisplay(e.key);
-  }
-  if (validOperatorKeys.includes(e.key)) {
-    updateOperatorDisplay(e.key);
-  }
-  if (e.key === "Enter") {
-    updateNumbersDisplay("=");
-  }
-  if (e.key === "Backspace") {
-    deleteText();
-  }
-  if (e.key === "c" || e.key === "C") {
-    clearText();
+  if (isCalculatorOn) {
+    if (validNumKeys.includes(e.key)) {
+      updateNumbersDisplay(e.key);
+    }
+    if (validOperatorKeys.includes(e.key)) {
+      updateOperatorDisplay(e.key);
+    }
+    if (e.key === "Enter") {
+      updateNumbersDisplay("=");
+    }
+    if (e.key === "Backspace") {
+      deleteText();
+    }
+    if (e.key === "c" || e.key === "C") {
+      clearText();
+    }
   }
 });
 
