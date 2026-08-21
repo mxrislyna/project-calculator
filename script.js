@@ -41,6 +41,7 @@ const numbers = document.querySelector('#left-btns');
 const operators = document.querySelector('#right-btns');
 const clearBtn = document.querySelector('.clear');
 const delBtn = document.querySelector('.del');
+const body = document.querySelector('body');
 
 let firstNumber;
 let secondNumber;
@@ -49,30 +50,7 @@ let calculationJustFinished = false;
 
 //Numbers
 numbers.addEventListener('click', (e) => {
-  const input = e.target.textContent;
-
-  if (input == "=") { 
-    parts = display.textContent.split(" ");
-    secondNumber = parts[2];
-    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
-    calculationJustFinished = true;
-  } else if (calculationJustFinished == true) {
-    display.textContent = input;
-    calculationJustFinished = false;
-  } else if (display.textContent === "0" || display.textContent == "ERROR") {
-    display.textContent = input;
-  } else if (input === ".") {
-    parts = display.textContent.split(" ");
-    if (!parts[parts.length - 1].includes(".")) {
-      if (parts[parts.length - 1] == "") {
-        display.textContent += "0";
-      } else {
-        display.textContent += ".";
-      }
-    }
-  } else {
-    display.textContent += input;
-  }
+  updateNumbersDisplay(e.target.textContent);
 });
 
 //Operators
@@ -100,7 +78,7 @@ operators.addEventListener('click', (e) => {
 
 //Clear/AC button 
 clearBtn.addEventListener('click', () => {
-  display.textContent = ""
+  display.textContent = "0";
   firstNumber = "";
   secondNumber = "";
   operator = "";
@@ -117,3 +95,45 @@ delBtn.addEventListener('click', () => {
   }
 });
 
+
+const validNumKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+   "."];
+
+const validOperatorKeys = ["/", "*", "-", "+"];
+
+//Numbers
+function updateNumbersDisplay(input) {
+  if (input == "=") { 
+    parts = display.textContent.split(" ");
+    secondNumber = parts[2];
+    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
+    calculationJustFinished = true;
+  } else if (calculationJustFinished == true) {
+    display.textContent = input;
+    calculationJustFinished = false;
+  } else if (display.textContent === "0" || display.textContent == "ERROR") {
+  display.textContent = input;
+  } else if (input === ".") {
+    parts = display.textContent.split(" ");
+    if (!parts[parts.length - 1].includes(".")) {
+      if (parts[parts.length - 1] == "") {
+        display.textContent += "0";
+      } else {
+        display.textContent += ".";
+      }
+    }
+  } else {
+    display.textContent += input;
+  }
+}
+
+//Keyboard support
+body.addEventListener('keypress', (e) => {
+  if (validNumKeys.includes(e.key)) {
+    updateNumbersDisplay(e.key);
+  }
+  if (validOperatorKeys.includes(e.key)) {
+    updateOperatorDisplay(e.key);
+  }
+  
+});
