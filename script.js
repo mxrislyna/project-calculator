@@ -55,7 +55,7 @@ numbers.addEventListener('click', (e) => {
 
 //Operators
 operators.addEventListener('click', (e) => {
-
+  updateOperatorDisplay(e.target.textContent);
 });
 
 //Clear/AC button 
@@ -67,20 +67,13 @@ clearBtn.addEventListener('click', () => {
 });
 
 //Del button
-delBtn.addEventListener('click', () => {
-  let text = display.textContent;
-  let shortenedText = text.trimEnd().slice(0, -1).trimEnd();
-  display.textContent = shortenedText;
-
-  if (display.textContent === "") {
-    display.textContent = "0";
-  }
+delBtn.addEventListener('click', (e) => {
+  deleteText();
 });
 
 
 const validNumKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
    "."];
-
 const validOperatorKeys = ["/", "*", "-", "+"];
 
 //Numbers
@@ -130,12 +123,29 @@ function updateOperatorDisplay(newOperator) {
   }
 }
 
+function deleteText() {
+  let text = display.textContent;
+  let shortenedText = text.trimEnd().slice(0, -1).trimEnd();
+  display.textContent = shortenedText;
+
+  if (display.textContent === "") {
+    display.textContent = "0";
+  }
+}
+
 //Keyboard support
-body.addEventListener('keypress', (e) => {
+body.addEventListener('keydown', (e) => {
   if (validNumKeys.includes(e.key)) {
     updateNumbersDisplay(e.key);
   }
   if (validOperatorKeys.includes(e.key)) {
     updateOperatorDisplay(e.key);
   }
+  if (e.key === "Enter") {
+    updateNumbersDisplay("=");
+  }
+  if (e.key === "Backspace") {
+    deleteText();
+  }
 });
+
