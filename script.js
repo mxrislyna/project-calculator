@@ -99,7 +99,10 @@ const validOperatorKeys = ["/", "*", "-", "+"];
 
 //Numbers
 function updateNumbersDisplay(input) {
-  if (input == "=") { 
+  if (input == "=") {
+    if (display.textContent.endsWith(" ")) {
+      return;
+    }
     parts = display.textContent.split(" ");
     secondNumber = parts[2];
     display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
@@ -108,18 +111,18 @@ function updateNumbersDisplay(input) {
     display.textContent = input;
     calculationJustFinished = false;
   } else if (display.textContent === "0" || display.textContent == "ERROR") {
-  display.textContent = input;
+    display.textContent = input;
   } else if (input === ".") {
     parts = display.textContent.split(" ");
-    if (!parts[parts.length - 1].includes(".")) {
-      if (parts[parts.length - 1] == "") {
-        display.textContent += "0";
+      if (!parts[parts.length - 1].includes(".")) {
+        if (parts[parts.length - 1] == "") {
+          display.textContent += "0";
       } else {
-        display.textContent += ".";
-      }
-    }
+      display.textContent += ".";
+      } 
+    } 
   } else {
-    display.textContent += input;
+  display.textContent += input;
   }
 }
 
@@ -181,4 +184,3 @@ body.addEventListener('keydown', (e) => {
     }
   }
 });
-
