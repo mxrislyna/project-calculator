@@ -55,25 +55,7 @@ numbers.addEventListener('click', (e) => {
 
 //Operators
 operators.addEventListener('click', (e) => {
-  let newOperator = e.target.textContent;
-  const parts = display.textContent.split(" ");
 
-  if (parts[2]) {
-    secondNumber = parts[2];
-    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
-    calculationJustFinished = true;
-  }
-  
-  if (display.textContent.endsWith(" ")) {
-    operator = newOperator;
-    let currText = display.textContent;
-    let shortenedCurrText = currText.trimEnd().slice(0,-1);
-    display.textContent =  shortenedCurrText + newOperator + " ";
-  } else {
-    firstNumber = display.textContent;
-    operator = newOperator;
-    display.textContent += " " + operator + " ";
-  }
 });
 
 //Clear/AC button 
@@ -127,6 +109,27 @@ function updateNumbersDisplay(input) {
   }
 }
 
+function updateOperatorDisplay(newOperator) {
+  const parts = display.textContent.split(" ");
+
+  if (parts[2]) {
+    secondNumber = parts[2];
+    display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
+    calculationJustFinished = true;
+  }
+  
+  if (display.textContent.endsWith(" ")) {
+    operator = newOperator;
+    let currText = display.textContent;
+    let shortenedCurrText = currText.trimEnd().slice(0,-1);
+    display.textContent =  shortenedCurrText + newOperator + " ";
+  } else {
+    firstNumber = display.textContent;
+    operator = newOperator;
+    display.textContent += " " + operator + " ";
+  }
+}
+
 //Keyboard support
 body.addEventListener('keypress', (e) => {
   if (validNumKeys.includes(e.key)) {
@@ -135,5 +138,4 @@ body.addEventListener('keypress', (e) => {
   if (validOperatorKeys.includes(e.key)) {
     updateOperatorDisplay(e.key);
   }
-  
 });
