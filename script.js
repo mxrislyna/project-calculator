@@ -53,15 +53,19 @@ let isCalculatorOn = true;
 //Numbers
 numbers.addEventListener('click', (e) => {
   if (isCalculatorOn) {
+    if (e.target.nodeName === "BUTTON") {
     updateNumbersDisplay(e.target.textContent);
+    }
   }
 });
 
 //Operators
 operators.addEventListener('click', (e) => {
   if (isCalculatorOn) {
+    if (e.target.nodeName === "BUTTON") {
   updateOperatorDisplay(e.target.textContent);
-  } 
+    }
+  }
 });
 
 //Clear/AC button 
@@ -129,10 +133,13 @@ function updateNumbersDisplay(input) {
 function updateOperatorDisplay(newOperator) {
   const parts = display.textContent.split(" ");
 
+  if (display.textContent === "ERROR") {
+    return;
+  }
+
   if (parts[2]) {
     secondNumber = parts[2];
     display.textContent = operate(Number(firstNumber), operator, Number(secondNumber));
-    calculationJustFinished = true;
   }
   
   if (display.textContent.endsWith(" ")) {
@@ -141,6 +148,7 @@ function updateOperatorDisplay(newOperator) {
     let shortenedCurrText = currText.trimEnd().slice(0,-1);
     display.textContent =  shortenedCurrText + newOperator + " ";
   } else {
+    calculationJustFinished = false;
     firstNumber = display.textContent;
     operator = newOperator;
     display.textContent += " " + operator + " ";
