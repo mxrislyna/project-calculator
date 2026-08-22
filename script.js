@@ -126,7 +126,10 @@ function updateNumbersDisplay(input) {
       } 
     } 
   } else {
-  display.textContent += input;
+    parts = display.textContent.split(" ");
+    if (parts[parts.length - 1].length <= 12) {
+      display.textContent += input;
+    }
   }
 }
 
