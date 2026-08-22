@@ -2,7 +2,7 @@
 
 This application mirrors a basic calculator that performs common arithmetic operations. Users can perform calculations using the on-screen buttons or their keyboard.
 
-[Play the live preview here!](YOUR-GITHUB-PAGES-URL)
+[Play the live preview here!](https://mxrislyna.github.io/project-calculator/)
 
 ## Tech Stack
 
