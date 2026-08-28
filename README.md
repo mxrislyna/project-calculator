@@ -16,7 +16,7 @@ This application mirrors a basic calculator that performs common arithmetic oper
 
 *begin entry*
 
-I'm happy with my new discovery today. I was writing the delBtn listener and part of the logic is to automatically delete the spaces when deleting. I learned to write this logic and my favorite part is discovering that I can chain the methods into one line. This is in line 79 in script.js.
+I'm happy with my new discovery today. I was writing the delBtn listener and part of the logic is to automatically delete the spaces when deleting. I learned to write this logic and my favorite part is discovering that I can chain the methods into one line. This is in line 163 in script.js.
 
 From-
 
